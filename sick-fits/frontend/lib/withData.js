@@ -43,4 +43,6 @@ function createClient({ headers, initialState }) {
   });
 }
 
+// withApollo crawls all our components and waits for their data to be fetched
+// before sending rehydration code to the client
 export default withApollo(createClient, { getDataFromTree });
