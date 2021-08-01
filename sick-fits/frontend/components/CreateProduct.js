@@ -1,6 +1,9 @@
+import { graphql } from 'graphql';
 import { useCallback } from 'react';
 import useForm from '../lib/useForm';
 import Form from './styles/Form';
+
+const CREATE_PRODUCT_MUTATION = gql``;
 
 export default function CreateProduct() {
   const [form, updateForm, resetForm, clearForm] = useForm({
@@ -10,21 +13,31 @@ export default function CreateProduct() {
     image: '',
   });
 
-  const handleFormSubmit = useCallback((e) => {
-    e.preventDefault();
-    console.log(e);
-  }, []);
+  const handleFormSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      console.log(form);
+    },
+    [form]
+  );
 
   return (
     <Form onSubmit={handleFormSubmit}>
       <fieldset aria-busy={false}>
         <label htmlFor="image">
           Image
-          <input type="file" id="image" name="image" onChange={updateForm} />
+          <input
+            required
+            type="file"
+            id="image"
+            name="image"
+            onChange={updateForm}
+          />
         </label>
         <label htmlFor="name">
           Name
           <input
+            required
             type="text"
             id="name"
             name="name"
