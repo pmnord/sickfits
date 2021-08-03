@@ -5,12 +5,13 @@ import Title from './styles/Title';
 import PriceTag from './styles/PriceTag';
 import formatMoney from '../lib/formatMoney';
 
-const Product = ({ product }) => (
+const Product = ({ product: { name, id, price, description, photo } }) => (
   <ItemStyles>
-    <img src={product?.photo?.image?.publicUrlTransformed} alt={product.name} />
+    <img src={photo.image.publicUrlTransformed} alt={name} />
     <Title>
-      <Link href={`/product/${product.id}`}>{product.name}</Link>
-      <PriceTag>{formatMoney(product.price)}</PriceTag>
+      <Link href={`/product/${id}`}>{name}</Link>
+      <PriceTag>{formatMoney(price)}</PriceTag>
+      <p>{description}</p>
     </Title>
   </ItemStyles>
 );

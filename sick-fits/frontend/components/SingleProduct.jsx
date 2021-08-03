@@ -1,7 +1,21 @@
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
-import Image from 'next/image';
+import Head from 'next/head';
+import styled from 'styled-components';
 import ErrorMessage from './ErrorMessage';
+
+const ProductStyles = styled.div`
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  max-width: var(--max-width);
+  align-items: top;
+  gap: 2rem;
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
+`;
 
 export const PRODUCT_QUERY = gql`
   query PRODUCT_QUERY($id: ID!) {
@@ -44,17 +58,15 @@ export default function SingleProduct({ id }) {
   } = data.product;
 
   return (
-    <div>
-      <div className="details" />
-      <h2>{name}</h2>
-      <p>{description}</p>
-      <Image height={128} width={128} src={publicUrlTransformed} alt={alt} />
-      <ul>
-        <li>Name: {name}</li>
-        <li>Price: {price}</li>
-        <li>Description: {description}</li>
-        <li>Status: {status}</li>
-      </ul>
-    </div>
+    <ProductStyles>
+      <Head>
+        <title>Sick Fits | {name}</title>
+      </Head>
+      <img src={publicUrlTransformed} alt={alt} />
+      <div className="details">
+        <h2>{name}</h2>
+        <p>{description}</p>
+      </div>
+    </ProductStyles>
   );
 }
