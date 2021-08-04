@@ -12,6 +12,18 @@ const Product = ({ product: { name, id, price, description, photo } }) => (
       <Link href={`/product/${id}`}>{name}</Link>
       <PriceTag>{formatMoney(price)}</PriceTag>
       <p>{description}</p>
+      <div className="buttonList">
+        <Link
+          href={{
+            pathname: 'update',
+            query: {
+              id,
+            },
+          }}
+        >
+          Edit ✏
+        </Link>
+      </div>
     </Title>
   </ItemStyles>
 );
